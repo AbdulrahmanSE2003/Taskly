@@ -4,6 +4,7 @@ export default function AddTask({ onAdd }) {
     const [todo, setTodo] = useState("");
 
     function handleAdd() {
+        if (todo.trim().length === 0) return;
         const newTask = {
             id: crypto.randomUUID(),
             title: todo,
