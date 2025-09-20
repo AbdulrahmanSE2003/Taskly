@@ -1,70 +1,51 @@
+// vite.config.js
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
-
-const manifestForPlugin = {
-  registerType: "prompt",
-  includeAssets: ['favicon.ico', "apple-touc-icon.png", "masked-icon.png" ],
-  manifest: {
-    name: "Taskly - Your To-Do App",
-    short_name: "Taskly",
-    description: "An app that helps you manage your tasks efficiently.",
-    icons: [
-
-      {
-        src: "./logo.png",
-        sizes: "192x192",
-        type: "image/png"
-      },
-      {
-        src: "./logo.png",
-        sizes: "512x512",
-        type: "image/png",
-        purpose:'favicon'
-      },
-      {
-        src: "./logo.png",
-        sizes: "144x144",
-        type: "image/png",
-        purpose: "any"
-      },
-      {
-        src: "./logo.png",
-        sizes: "256x256",
-        type: "image/png",
-        purpose: "icon"
-      },
-    ],
-    theme_color: "#181818",
-    background_color: "#e8eac2",
-    display: "standalone",
-    scope: "/",
-    start_url: "/",
-    orientation: "portrait",
-  },
-};
-
-
-
-// https://vitejs.dev/config/
 export default defineConfig({
-
-  plugins: [react(), VitePWA({...manifestForPlugin, workbox: {
-      runtimeCaching: [
-        {
-          urlPattern: ({ request }) => request.destination === 'document' || request.destination === 'script' || request.destination === 'style' || request.destination === 'image',
-          handler: 'CacheFirst',
-          options: {
-            cacheName: 'assets-cache',
-            expiration: {
-              maxEntries: 50,
-              maxAgeSeconds: 60 * 60 * 24 * 30 // 30 يوم
+  plugins: [
+    react(),
+    VitePWA({
+      registerType: 'autoUpdate', // لو عايز SW يحدث نفسه تلقائي
+      manifest: {
+        name: "Taskly - Your To-Do App",
+        short_name: "Taskly",
+        description: "Manage your tasks efficiently",
+        theme_color: "#181818",
+        background_color: "#e8eac2",
+        display: "standalone", // مهم جداً لـ installable
+        start_url: "/",
+        scope: "/",
+        orientation: "portrait",
+        icons: [
+          {
+            src: "logo.png",
+            sizes: "192x192",
+            type: "image/png",
+            purpose: "any maskable"
+          },
+        ]
+      },
+      workbox: {
+        runtimeCaching: [
+          {
+            urlPattern: ({ request }) =>
+                request.destination === 'document' ||
+                request.destination === 'script' ||
+                request.destination === 'style' ||
+                request.destination === 'image',
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'assets-cache',
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 30 * 24 * 60 * 60 // 30 يوم
+              }
             }
           }
-        }
-      ]
-    }})],
-});
-
-
+        ]
+      }
+    })
+  ]
+})
