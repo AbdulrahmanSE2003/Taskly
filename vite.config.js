@@ -24,12 +24,6 @@ const manifestForPlugin = {
         purpose:'favicon'
       },
       {
-        src: '/logo.png',
-        sizes:'180x180',
-        type:'image/png',
-        purpose:'apple touch icon',
-      },
-      {
         src: "./logo.png",
         sizes: "144x144",
         type: "image/png",
@@ -41,12 +35,6 @@ const manifestForPlugin = {
         type: "image/png",
         purpose: "icon"
       },
-      {
-        src: "./logo.png",
-        sizes: "384x384",
-        type: "image/png",
-        purpose: "any maskable"
-      }
     ],
     theme_color: "#181818",
     background_color: "#e8eac2",
@@ -62,7 +50,21 @@ const manifestForPlugin = {
 // https://vitejs.dev/config/
 export default defineConfig({
 
-  plugins: [react(), VitePWA(manifestForPlugin)],
+  plugins: [react(), VitePWA({...manifestForPlugin, workbox: {
+      runtimeCaching: [
+        {
+          urlPattern: ({ request }) => request.destination === 'document' || request.destination === 'script' || request.destination === 'style' || request.destination === 'image',
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'assets-cache',
+            expiration: {
+              maxEntries: 50,
+              maxAgeSeconds: 60 * 60 * 24 * 30 // 30 يوم
+            }
+          }
+        }
+      ]
+    }})],
 });
 
 
