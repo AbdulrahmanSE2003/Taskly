@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
 import TasksList from "./components/TasksList.jsx";
 import AddTask from "./components/AddTask";
+import ProgressBar from "./components/ProgressBar.jsx";
+import MotivationalQuotes from "./components/MotivationalQuotes.jsx";
 
 export default function App() {
     const savedTheme = localStorage.getItem("theme") || "light";
@@ -14,6 +16,11 @@ export default function App() {
             localStorage.setItem("tasks", JSON.stringify(updatedTasks));
             return updatedTasks;
         });
+    }
+
+    function handleClearAll(){
+        setTasks([])
+        localStorage.setItem("tasks", JSON.stringify([]));
     }
 
     useEffect(() => {
@@ -52,9 +59,18 @@ export default function App() {
                     <span className="text-red-600">-</span>Do
                     <span className="text-red-600">'</span>s
                 </h3>
-
+                <MotivationalQuotes/>
                 <AddTask onAdd={handleAddTask} />
+                <ProgressBar tasks={tasks}/>
                 <TasksList tasks={tasks} setTasks={setTasks} />
+
+                <button
+                    onClick={handleClearAll}
+                    className={`${tasks.length === 0 ? "hidden" : ""} mt-3 px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors capitalize`}
+                >
+                    Clear All
+                </button>
+
             </div>
 
         </div>
