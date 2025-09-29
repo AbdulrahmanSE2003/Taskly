@@ -40,7 +40,7 @@ export default function App() {
                 : "bg-gray-900 text-white"
         }`}>
             <div
-                className={`flex flex-col justify-center items-center px-5 sm:px-0 w-full sm:w-1/2 mx-auto h-screen transition-[width] duration-500 ease-in-out `}
+                className={`flex flex-col justify-center items-center px-5 sm:px-0 w-full sm:w-5/6 lg:w-2/3 mx-auto h-screen transition-[width] duration-500 ease-in-out `}
             >
                 <label className="absolute right-8 top-5 inline-block w-12 h-6">
                     <input

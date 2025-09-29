@@ -31,7 +31,7 @@ export default function MotivationalQuotes() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="absolute top-20 px-8 py-10 w-11/12 sm:w-1/2 leading-8 rounded-2xl text-center text-lg sm:text-xl font-medium italic
+            className="absolute top-20 px-8 py-10 w-11/12  sm:w-5/6 lg:w-2/3 leading-8 rounded-2xl text-center text-lg sm:text-xl font-medium italic
                  bg-white/80 dark:bg-gray-800/90 text-gray-900 dark:text-gray-100
                  shadow-md backdrop-blur-md border border-gray-200 dark:border-gray-700"
         >
