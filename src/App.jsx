@@ -58,7 +58,7 @@ export default function App() {
                 <Sidebar />
 
                 {/* Main content area */}
-                <main className="flex-1 p-6">
+                <main className="flex-1 p-6 full-width px-20 relative">
                     <Routes>
                         <Route
                             path="/"

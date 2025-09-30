@@ -7,7 +7,7 @@ export default function TasksPage({ tasks, setTasks, addTask, clearTasks, theme,
     return (
         <div>
             {/* Theme Switch */}
-            <label className="absolute right-8 top-5 inline-block w-12 h-6">
+            <label className="absolute right-5 top-5 inline-block w-12 h-6">
                 <input
                     type="checkbox"
                     onChange={toggleTheme}
