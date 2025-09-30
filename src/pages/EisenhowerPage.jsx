@@ -34,7 +34,7 @@ const EisenhowerPage = () => {
         />
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 items-center my-10 md:full-height gap-5 gap-y-7">
+      <div className="grid grid-cols-1 lg:grid-cols-2 items-center my-10 lg:full-height gap-5 gap-y-7">
         <Cell
           toggleModal={handleShowModal}
           tasks={tasksForCells}
