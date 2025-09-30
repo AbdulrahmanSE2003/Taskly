@@ -15,6 +15,7 @@ const Cell = ({
   title,
   toggleModal,
   tasks,
+  onDelete,
 }) => {
   const accepted = tasks.filter((task) => task.cell === title);
   console.log(accepted);
@@ -43,7 +44,7 @@ const Cell = ({
           className={`flex gap-3 mt-4 overflow-y-auto flex-wrap max-h-40 w-full flex-1`}
         >
           {accepted.map((task) => (
-            <CellItem title={task.title} color={color} key={task.id} />
+            <CellItem task={task} color={color} key={task.id} onDelete={onDelete}/>
           ))}
         </div>
 

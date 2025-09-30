@@ -8,7 +8,7 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`h-screen shadow-2xl bg-gray-100 dark:bg-gray-900 text-white flex flex-col p-4 transition-all duration-300 
+      className={`h-screen sticky top-0 shadow-2xl bg-gray-100 dark:bg-gray-900 text-white flex flex-col p-4 transition-all duration-300 
         ${isOpen ? "w-56" : "w-16"}`}
     >
       {/* زرار المينيو */}

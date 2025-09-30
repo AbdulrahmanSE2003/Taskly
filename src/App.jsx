@@ -49,7 +49,7 @@ export default function App() {
       <div
         className={
           theme === "light"
-            ? "bg-white text-black flex"
+            ? "bg-white text-black flex min-h-screen"
             : "bg-body-bg-dark text-white flex"
         }
       >
@@ -58,7 +58,7 @@ export default function App() {
         <ThemeSwitch theme={theme} toggleTheme={toggleTheme} />
 
         {/* Main content area */}
-        <main className="flex-1 p-6 full-width px-20 relative">
+        <main className="flex-1 px-5 p-6 full-width md:px-20 relative ">
           <Routes>
             <Route
               path="/"
