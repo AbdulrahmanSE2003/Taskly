@@ -1,31 +1,32 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --color-body-color: #1e2a3a;
-    --color-body-dark-color: #101c2a;
-    --color-grey-color: #696565;
-    --color-accent-red: #cb1717;
+  --color-body-color: #1e2a3a;
+  --color-body-dark-color: #101c2a;
+  --color-grey-color: #696565;
+  --color-accent-red: #cb1717;
 }
 
 body {
-    margin: 0;
-    font-family: "Quicksand", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background-color: #f4f4f4;
-    transition: background-color ease-in-out 0.35s, color ease-in-out 0.30s;
+  margin: 0;
+  font-family: "Quicksand", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f4f4f4;
+  transition:
+    background-color ease-in-out 0.35s,
+    color ease-in-out 0.3s;
 }
 @layer base {
-    input::placeholder{
-        @apply placeholder:opacity-100 transition-opacity duration-300 ;
-    }
-    input:focus::placeholder{
-        @apply opacity-0;
-    }
-
+  input::placeholder {
+    @apply placeholder:opacity-100 transition-opacity duration-300;
+  }
+  input:focus::placeholder {
+    @apply opacity-0;
+  }
 }
 
 /*body.dark {*/
@@ -241,4 +242,3 @@ body {
 /*        width: 85%;*/
 /*    }*/
 /*}*/
-

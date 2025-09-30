@@ -1,78 +1,85 @@
-import {useEffect, useState} from "react";
-import TasksList from "./components/TasksList.jsx";
-import AddTask from "./components/AddTask";
-import ProgressBar from "./components/ProgressBar.jsx";
-import MotivationalQuotes from "./components/MotivationalQuotes.jsx";
+// App.jsx
+import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import Sidebar from "./components/Sidebar.jsx";
+import TasksPage from "./pages/TasksPage.jsx";
+import EisenhowerPage from "./pages/EisenhowerPage.jsx";
 
 export default function App() {
-    const savedTheme = localStorage.getItem("theme") || "light";
-    const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem("tasks")) || []);
-    const [theme, setTheme] = useState(savedTheme);
+    // ===== State =====
+    const [tasks, setTasks] = useState(
+        JSON.parse(localStorage.getItem("tasks")) || []
+    );
+    const [theme, setTheme] = useState(
+        localStorage.getItem("theme") || "light"
+    );
 
-
-    function handleAddTask(task) {
-        setTasks((prevTasks) => {
-            const updatedTasks = [...prevTasks, task];
-            localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-            return updatedTasks;
+    // ===== Handlers =====
+    function addTask(task) {
+        setTasks((prev) => {
+            const updated = [...prev, task];
+            localStorage.setItem("tasks", JSON.stringify(updated));
+            return updated;
         });
     }
 
-    function handleClearAll(){
-        setTasks([])
+    function clearTasks() {
+        setTasks([]);
         localStorage.setItem("tasks", JSON.stringify([]));
     }
 
-    useEffect(() => {
-        localStorage.setItem("theme", theme);
-        if (theme === "dark") document.body.classList.add("dark");
-        if (theme !== "dark") document.body.classList.remove("dark")
-    }, [theme]);
-
-    function handleMode() {
-        setTheme((theme) => (theme === "light" ? "dark" : "light"));
+    function toggleTheme() {
+        setTheme((prev) => (prev === "light" ? "dark" : "light"));
     }
 
+    // ===== Effects =====
+    useEffect(() => {
+        localStorage.setItem("theme", theme);
+
+        if (theme === "dark") {
+            document.body.classList.add("dark");
+        } else {
+            document.body.classList.remove("dark");
+        }
+    }, [theme]);
+
+    // ===== Render =====
     return (
-        <div className={`${
-            theme === "light"
-                ? "bg-white text-black"
-                : "bg-gray-900 text-white"
-        }`}>
+        <Router>
             <div
-                className={`flex flex-col justify-center items-center px-5 sm:px-0 w-full sm:w-5/6 lg:w-2/3 mx-auto h-screen transition-[width] duration-500 ease-in-out `}
+                className={
+                    theme === "light"
+                        ? "bg-white text-black flex"
+                        : "bg-gray-900 text-white flex"
+                }
             >
-                <label className="absolute right-8 top-5 inline-block w-12 h-6">
-                    <input
-                        type="checkbox"
-                        onClick={handleMode}
-                        checked={theme === "dark"}
-                        className="opacity-0 w-0 h-0 peer"
-                    />
-                    <span className="absolute cursor-pointer top-0 left-0 right-0 bottom-0 bg-gray-300 dark:bg-gray-600 rounded-full transition-colors duration-300 peer-checked:bg-red-600"></span>
-                    <span className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform duration-300 peer-checked:translate-x-6"></span>
-                </label>
+                {/* Sidebar ثابت */}
+                <Sidebar />
 
-                <h3 className="text-xl sm:text-4xl font-medium mt-4 w-full -ml-3">
-                    <span className="mx-2 text-red-600 font-medium">|</span>
-                    Your To
-                    <span className="text-red-600">-</span>Do
-                    <span className="text-red-600">'</span>s
-                </h3>
-                <MotivationalQuotes/>
-                <AddTask onAdd={handleAddTask} />
-                <ProgressBar tasks={tasks}/>
-                <TasksList tasks={tasks} setTasks={setTasks} />
-
-                <button
-                    onClick={handleClearAll}
-                    className={`${tasks.length === 0 ? "hidden" : ""} mt-3 px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors capitalize`}
-                >
-                    Clear All
-                </button>
-
+                {/* Main content area */}
+                <main className="flex-1 p-6">
+                    <Routes>
+                        <Route
+                            path="/"
+                            element={
+                                <TasksPage
+                                    tasks={tasks}
+                                    setTasks={setTasks}
+                                    addTask={addTask}
+                                    clearTasks={clearTasks}
+                                    theme={theme}
+                                    toggleTheme={toggleTheme}
+                                />
+                            }
+                        />
+                        <Route
+                            path="/eisenhower"
+                            element={<EisenhowerPage />}
+                        />
+                    </Routes>
+                </main>
             </div>
-
-        </div>
+        </Router>
     );
 }
