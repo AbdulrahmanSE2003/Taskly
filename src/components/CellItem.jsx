@@ -4,7 +4,7 @@ const COLORS = {
   yellow: "bg-yellow-200",
   red: "bg-red-200",
   gray: "bg-gray-200 dark:bg-gray-400",
-  green: "bg-green-200",
+  emerald: "bg-emerald-200",
 };
 
 const CellItem = ({ color, task,onDelete }) => {
