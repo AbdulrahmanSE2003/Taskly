@@ -10,7 +10,9 @@
   --color-grey-color: #696565;
   --color-accent-red: #cb1717;
 }
-
+html{
+    overflow-x: hidden;
+}
 body {
   margin: 0;
   font-family: "Quicksand", sans-serif;

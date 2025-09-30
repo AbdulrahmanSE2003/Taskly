@@ -1,43 +1,46 @@
-import { CheckCircle2 } from "lucide-react"; // أيقونة جاهزة من lucide
+import { DndContext, closestCenter } from "@dnd-kit/core";
+import { SortableContext, arrayMove, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import Task from "./Task.jsx";
 
-export default function TasksList({ setTasks, tasks }) {
-  function handleCheck(id) {
-    const updatedTasks = tasks.map((task) =>
-      task.id === id ? { ...task, isDone: !task.isDone } : task,
-    );
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-    setTasks(updatedTasks);
-  }
+export default function TasksList({ tasks, setTasks }) {
 
-  function handleDelete(id) {
-    const updatedTasks = tasks.filter((task) => task.id !== id);
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-    setTasks(updatedTasks);
-  }
+    function handleDragEnd(event) {
+        const { active, over } = event;
+        if (!over || active.id === over.id) return;
 
-  if (tasks.length === 0) {
+        const oldIndex = tasks.findIndex(t => t.id === active.id);
+        const newIndex = tasks.findIndex(t => t.id === over.id);
+
+        setTasks(arrayMove(tasks, oldIndex, newIndex));
+        localStorage.setItem("tasks", JSON.stringify(arrayMove(tasks, oldIndex, newIndex)));
+    }
+
+    function handleCheck(id) {
+        const updatedTasks = tasks.map(t => t.id === id ? { ...t, isDone: !t.isDone } : t);
+        setTasks(updatedTasks);
+        localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    }
+
+    function  handleDelete (id)  {
+        const updatedTasks = tasks.filter(t => t.id !== id);
+        setTasks(updatedTasks);
+        localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    }
+
     return (
-      <div className="flex flex-col items-center justify-center py-10 text-gray-500">
-        <CheckCircle2 className="w-12 h-12 mb-4 text-gray-400" />
-        <p className="text-sm sm:text-lg font-medium text-center">
-          No tasks yet ✨ <br />
-          Start by adding your first one 🚀
-        </p>
-      </div>
+        <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+            <SortableContext items={tasks} strategy={verticalListSortingStrategy}>
+                <ul className={`w-full py-5 space-y-3 overflow-y-hidden overflow-x-hidden max-h-[${tasks.length * 50}px]`}>
+                    {tasks.map(task => (
+                        <Task
+                            key={task.id}
+                            task={task}
+                            onCheck={handleCheck}
+                            onDelete={handleDelete}
+                        />
+                    ))}
+                </ul>
+            </SortableContext>
+        </DndContext>
     );
-  }
-
-  return (
-    <ul className="w-full py-5 space-y-3 overflow-y-auto">
-      {tasks.map((task) => (
-        <Task
-          task={task}
-          key={task.id}
-          onCheck={handleCheck}
-          onDelete={handleDelete}
-        />
-      ))}
-    </ul>
-  );
 }
