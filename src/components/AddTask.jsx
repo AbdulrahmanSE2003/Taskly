@@ -33,7 +33,7 @@ export default function AddTask({ onAdd }) {
       />
       <button
         onClick={handleAdd}
-        className="rounded-r-lg bg-red-600 text-white text-xl font-bold w-12 h-full flex items-center justify-center hover:bg-red-700 transition-colors"
+        className="rounded-r-lg bg-red-600 text-white text-xl font-bold w-12 h-full flex items-center justify-center hover:bg-red-700 transition-colors cursor-pointer"
       >
         +
       </button>

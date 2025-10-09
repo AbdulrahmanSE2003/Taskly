@@ -1,0 +1,5 @@
+{
+  "appId": "com.Taskly.myapp",
+  "appName": "Taskly",
+  "webDir": "dist"
+}
