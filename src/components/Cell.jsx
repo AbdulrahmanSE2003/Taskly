@@ -44,7 +44,12 @@ const Cell = ({
           className={`flex gap-3 mt-4 overflow-y-auto flex-wrap max-h-40 w-full flex-1`}
         >
           {accepted.map((task) => (
-            <CellItem task={task} color={color} key={task.id} onDelete={onDelete}/>
+            <CellItem
+              task={task}
+              color={color}
+              key={task.id}
+              onDelete={onDelete}
+            />
           ))}
         </div>
 

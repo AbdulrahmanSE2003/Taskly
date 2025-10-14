@@ -5,7 +5,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar.jsx";
 import TasksPage from "./pages/TasksPage.jsx";
 import EisenhowerPage from "./pages/EisenhowerPage.jsx";
-import ThemeSwitch from "../src/components/ThemeSwitch.jsx";
+import YearlyGoals from "./pages/YearlyGoals.jsx";
+import QuarterlyGoals from "./pages/QuarteryGoals.jsx";
 
 export default function App() {
   // ===== State =====
@@ -49,13 +50,12 @@ export default function App() {
       <div
         className={
           theme === "light"
-            ? "bg-white text-black flex min-h-screen"
+            ? "bg-gray-100/60 text-black flex min-h-screen"
             : "bg-body-bg-dark text-white flex"
         }
       >
         {/* Sidebar ثابت */}
-        <Sidebar />
-        <ThemeSwitch theme={theme} toggleTheme={toggleTheme} />
+        <Sidebar theme={theme} toggleTheme={toggleTheme} />
 
         {/* Main content area */}
         <main className="flex-1 px-5 p-6 full-width md:px-20 relative ">
@@ -74,6 +74,8 @@ export default function App() {
               }
             />
             <Route path="/eisenhower" element={<EisenhowerPage />} />
+            <Route path="/yearlyGoals" element={<YearlyGoals />} />
+            <Route path="/quarterlyGoals" element={<QuarterlyGoals />} />
           </Routes>
         </main>
       </div>

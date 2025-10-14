@@ -16,7 +16,7 @@ export default function Task({ task, onCheck, onDelete }) {
       ref={setNodeRef}
       style={style}
       {...attributes}
-      className="flex items-center justify-between bg-transparent border border-gray-400 hover:border-accent-red transition-colors duration-300 rounded-lg px-4 py-2 shadow-sm"
+      className="flex items-center justify-between bg-white dark:bg-body-color border border-gray-400 dark:border-gray-600 hover:border-accent-red transition-colors duration-300 rounded-lg px-4 py-2 shadow-sm"
     >
       {/* الجزء الأيسر: checkbox + title */}
       <div className="flex items-center gap-3">

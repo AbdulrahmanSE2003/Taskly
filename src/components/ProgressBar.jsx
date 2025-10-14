@@ -1,10 +1,10 @@
-function ProgressBar({ tasks }) {
-  const total = tasks.length || 0;
-  const completed = tasks.filter((t) => t.isDone).length;
+function ProgressBar({ items }) {
+  const total = items.length || 0;
+  const completed = items.filter((t) => t.done).length;
   const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
 
   return (
-    tasks.length > 0 && (
+    items.length > 0 && (
       <div className="w-full my-4 ">
         <div className="flex justify-between mb-1 text-sm text-gray-600 dark:text-gray-300">
           <span>

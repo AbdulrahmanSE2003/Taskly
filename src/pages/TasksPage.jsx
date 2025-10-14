@@ -2,19 +2,12 @@ import AddTask from "../components/AddTask";
 import TasksList from "../components/TasksList.jsx";
 import ProgressBar from "../components/ProgressBar.jsx";
 import MotivationalQuotes from "../components/MotivationalQuotes.jsx";
+import Button from "../components/Button.jsx";
+import EmptyState from "../components/EmptyState.jsx";
 
-export default function TasksPage({
-  tasks,
-  setTasks,
-  addTask,
-  clearTasks,
-  theme,
-  toggleTheme,
-}) {
+export default function TasksPage({ tasks, setTasks, addTask, clearTasks }) {
   return (
     <div>
-      {/* Theme Switch */}
-
       <MotivationalQuotes />
 
       <h3 className="text-xl sm:text-4xl font-medium mt-4 w-full -ml-3">
@@ -24,16 +17,19 @@ export default function TasksPage({
       </h3>
 
       <AddTask onAdd={addTask} />
-      <ProgressBar tasks={tasks} />
-      <TasksList tasks={tasks} setTasks={setTasks} />
+      {tasks.length === 0 ? (
+        <EmptyState />
+      ) : (
+        <>
+          <ProgressBar items={tasks} />
+          <TasksList tasks={tasks} setTasks={setTasks} />
+        </>
+      )}
 
       {tasks.length > 0 && (
-        <button
-          onClick={clearTasks}
-          className="mt-3 px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors capitalize"
-        >
+        <Button onClick={clearTasks} bg={`bg-red-500`}>
           Clear All
-        </button>
+        </Button>
       )}
     </div>
   );

@@ -5,7 +5,9 @@ import AddTaskModal from "../components/AddTaskModal.jsx";
 const EisenhowerPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [cellToEdit, setCellToEdit] = useState(null);
-  const [tasksForCells, setTasksForCells] = useState(JSON.parse(localStorage.getItem("eisenhowerTasks")) || []);
+  const [tasksForCells, setTasksForCells] = useState(
+    JSON.parse(localStorage.getItem("eisenhowerTasks")) || [],
+  );
 
   function handleShowModal(t) {
     setShowModal((prev) => !prev);
@@ -13,15 +15,15 @@ const EisenhowerPage = () => {
   }
 
   function handleAddTask(t) {
-    const updatedTasks = [...tasksForCells, t]
+    const updatedTasks = [...tasksForCells, t];
     localStorage.setItem("eisenhowerTasks", JSON.stringify(updatedTasks));
     setTasksForCells(updatedTasks);
   }
 
-  function handleDelete(id){
-      const updatedTasks = tasksForCells.filter(task => task.id !== id);
-      localStorage.setItem("eisenhowerTasks", JSON.stringify(updatedTasks));
-      setTasksForCells(updatedTasks);
+  function handleDelete(id) {
+    const updatedTasks = tasksForCells.filter((task) => task.id !== id);
+    localStorage.setItem("eisenhowerTasks", JSON.stringify(updatedTasks));
+    setTasksForCells(updatedTasks);
   }
 
   return (
