@@ -6,12 +6,14 @@ import Modal from "../components/Modal.jsx";
 function YearlyGoals() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const [goals, setGoals] = useState(JSON.parse(localStorage.getItem('yearlyGoals')) || []);
+  const [goals, setGoals] = useState(
+    JSON.parse(localStorage.getItem("yearlyGoals")) || [],
+  );
 
   function addGoal(newGoal) {
-      const newGoals =  [...goals, newGoal]
+    const newGoals = [...goals, newGoal];
     setGoals(newGoals);
-    localStorage.setItem('yearlyGoals', JSON.stringify(newGoals))
+    localStorage.setItem("yearlyGoals", JSON.stringify(newGoals));
   }
 
   function handleToggleST(gId, stId) {

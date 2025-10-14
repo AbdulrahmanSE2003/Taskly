@@ -23,7 +23,7 @@ const Cell = ({
   return (
     <>
       <div
-        className={`border border-gray-200 rounded-xl p-5 ${className || ""} hover:border-gray-300 transition-colors duration-300 dark:border-gray-400 dark:hover:border-gray-200 flex flex-col items-start gap-3`}
+        className={`border border-gray-300 rounded-xl p-5 ${className || ""} hover:border-gray-400 transition-colors duration-300 dark:border-gray-400 dark:hover:border-gray-200 flex flex-col items-start gap-3`}
       >
         <div className={`flex items-center justify-start gap-4 mb-2`}>
           <div
